@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-sus-primary: #0056b3;
+  --color-sus-primary-hover: #004494;
+  --color-sus-secondary: #059669; /* Verde Saúde / Emerald 600 */
+  --color-sus-accent: #3b82f6;
+  --color-sus-background: #f8fafc; /* Slate 50 */
+  --color-sus-surface: #ffffff;
+  --color-sus-foreground: #0f172a; /* Slate 900 */
+  --color-sus-muted: #64748b; /* Slate 500 */
+  
+  --font-sans: var(--font-inter), sans-serif;
+  
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-sus-background);
+    --foreground: var(--color-sus-foreground);
+    --surface: var(--color-sus-surface);
+  }
+
+  .dark {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --surface: #1e293b;
+  }
+
+  .contrast-more {
+    --background: #000000;
+    --foreground: #ffff00;
+    --surface: #111111;
+    --color-sus-primary: #ffff00;
+    --color-sus-primary-hover: #ffffff;
+    --color-sus-secondary: #00ff00;
+    --color-sus-accent: #00ffff;
+    --color-sus-background: #000000;
+    --color-sus-surface: #111111;
+    --color-sus-foreground: #ffff00;
+    --color-sus-muted: #cccccc;
+  }
+
+  .contrast-more * {
+    border-color: #ffff00 !important;
+  }
+
+  html {
+    @apply h-full;
+  }
+  
+  html.text-pequeno { font-size: 14px; }
+  html.text-medio { font-size: 16px; }
+  html.text-grande { font-size: 20px; }
+  html.text-muito-grande { font-size: 24px; }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    @apply antialiased h-full transition-colors duration-300;
+  }
+
+  /* Accessibility focus styles for keyboard navigation */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-sus-accent ring-offset-2 ring-offset-[var(--background)];
+  }
+}
+
+.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

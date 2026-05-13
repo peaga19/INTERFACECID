@@ -1,0 +1,24 @@
+{
+  "name": "Meu SUS Digital",
+  "short_name": "Meu SUS",
+  "description": "A sua plataforma moderna e acessível de saúde do SUS.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0056b3",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/window.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/window.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
+    }
+  ]
+}
