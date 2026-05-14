@@ -17,13 +17,13 @@ export default function DashboardPage() {
         </div>
         <Link 
           href="/dashboard/notificacoes"
-          className="relative inline-flex items-center justify-center rounded-xl shadow-sm bg-white dark:bg-slate-800 h-12 w-12 border-2 border-transparent hover:border-sus-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sus-accent"
+          className="relative inline-flex items-center justify-center rounded-xl shadow-md bg-sus-primary h-12 w-12 border-2 border-transparent hover:bg-sus-primary-hover transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sus-accent active:scale-95"
           aria-label="Notificações"
         >
-          <Bell className="w-6 h-6 text-sus-foreground" />
+          <Bell className="w-6 h-6 text-white" />
           <span className="absolute top-2 right-2 flex h-4 w-4">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-600 border-2 border-white dark:border-slate-800"></span>
+            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-600 border-2 border-sus-primary"></span>
           </span>
         </Link>
       </header>

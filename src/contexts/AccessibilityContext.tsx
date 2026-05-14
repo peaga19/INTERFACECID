@@ -3,10 +3,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type TextSize = "pequeno" | "medio" | "grande" | "muito-grande";
+export type Theme = "light" | "dark";
 
 interface AccessibilityContextType {
   highContrast: boolean;
   setHighContrast: (value: boolean) => void;
+  theme: Theme;
+  setTheme: (value: Theme) => void;
   textSize: TextSize;
   setTextSize: (value: TextSize) => void;
   reduceMotion: boolean;
@@ -21,20 +24,38 @@ const AccessibilityContext = createContext<AccessibilityContextType | undefined>
 
 export function AccessibilityProvider({ children }: { children: React.ReactNode }) {
   const [highContrast, setHighContrast] = useState(false);
+  const [theme, setTheme] = useState<Theme>("light");
   const [textSize, setTextSize] = useState<TextSize>("medio");
   const [reduceMotion, setReduceMotion] = useState(false);
   const [dyslexiaFont, setDyslexiaFont] = useState(false);
   const [audioReader, setAudioReader] = useState(false);
 
+  // Load settings from localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("sus-theme") as Theme;
+    if (savedTheme) setTheme(savedTheme);
+    
+    const savedHighContrast = localStorage.getItem("sus-high-contrast") === "true";
+    setHighContrast(savedHighContrast);
+  }, []);
+
   useEffect(() => {
     const root = document.documentElement;
     
-    // Toggle high contrast class
+    // Theme and High Contrast logic
     if (highContrast) {
       root.classList.add("dark", "contrast-more");
     } else {
-      root.classList.remove("dark", "contrast-more");
+      root.classList.remove("contrast-more");
+      if (theme === "dark") {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
     }
+
+    localStorage.setItem("sus-theme", theme);
+    localStorage.setItem("sus-high-contrast", String(highContrast));
 
     // Apply text size
     root.classList.remove("text-pequeno", "text-medio", "text-grande", "text-muito-grande");
@@ -53,7 +74,7 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
     } else {
       root.classList.remove("font-dyslexia");
     }
-  }, [highContrast, textSize, reduceMotion, dyslexiaFont]);
+  }, [highContrast, theme, textSize, reduceMotion, dyslexiaFont]);
 
   // Audio Reader (Speechify clone)
   useEffect(() => {
@@ -99,6 +120,8 @@ export function AccessibilityProvider({ children }: { children: React.ReactNode 
       value={{
         highContrast,
         setHighContrast,
+        theme,
+        setTheme,
         textSize,
         setTextSize,
         reduceMotion,

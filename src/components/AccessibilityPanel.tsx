@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useAccessibility, TextSize } from "@/contexts/AccessibilityContext";
 import { Button } from "@/components/ui/Button";
-import { Settings, Eye, Type, Activity, BookOpen, X, Volume2 } from "lucide-react";
+import { Settings, Eye, Type, Activity, BookOpen, X, Volume2, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function AccessibilityPanel() {
@@ -11,6 +11,8 @@ export function AccessibilityPanel() {
   const {
     highContrast,
     setHighContrast,
+    theme,
+    setTheme,
     textSize,
     setTextSize,
     reduceMotion,
@@ -28,7 +30,7 @@ export function AccessibilityPanel() {
           variant="primary"
           size="icon"
           onClick={() => setIsOpen(true)}
-          aria-label="Abrir painel de acessibilidade"
+          aria-label="Abrir painel de configurações e acessibilidade"
           aria-expanded={isOpen}
           className="rounded-full h-14 w-14 shadow-lg flex items-center justify-center bg-blue-600 hover:bg-blue-700"
         >
@@ -58,7 +60,7 @@ export function AccessibilityPanel() {
               <div className="p-6 flex flex-col gap-6">
                 <div className="flex justify-between items-center">
                   <h2 id="a11y-title" className="text-xl font-bold text-sus-foreground">
-                    Acessibilidade
+                    Configurações
                   </h2>
                   <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Fechar painel">
                     <X className="w-5 h-5" />
@@ -66,6 +68,33 @@ export function AccessibilityPanel() {
                 </div>
 
                 <div className="flex flex-col gap-4">
+                  {/* Seção de Tema */}
+                  <div className="p-4 rounded-xl border-2 border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-sus-foreground">
+                        <Sun className="w-5 h-5 dark:hidden" />
+                        <Moon className="w-5 h-5 hidden dark:block" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sus-foreground">Aparência</div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      <ThemeButton 
+                        label="Modo Claro" 
+                        icon={<Sun className="w-4 h-4" />} 
+                        active={theme === "light"} 
+                        onClick={() => setTheme("light")} 
+                      />
+                      <ThemeButton 
+                        label="Modo Escuro" 
+                        icon={<Moon className="w-4 h-4" />} 
+                        active={theme === "dark"} 
+                        onClick={() => setTheme("dark")} 
+                      />
+                    </div>
+                  </div>
+
                   <A11yOption
                     icon={<Eye className="w-5 h-5" />}
                     title="Alto Contraste (Real)"
@@ -103,7 +132,7 @@ export function AccessibilityPanel() {
                   <div className="space-y-2">
                     <A11yOption
                       icon={<BookOpen className="w-5 h-5" />}
-                      title="Modo Dislexia"
+                      title="Modo Acessibilidade"
                       description="Fonte otimizada para leitura"
                       isActive={dyslexiaFont}
                       onClick={() => setDyslexiaFont(!dyslexiaFont)}
@@ -128,6 +157,22 @@ export function AccessibilityPanel() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function ThemeButton({ label, icon, active, onClick }: { label: string, icon: React.ReactNode, active: boolean, onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center justify-center gap-2 py-3 rounded-xl font-bold transition-all border-2 ${
+        active 
+          ? "bg-sus-primary text-white border-sus-primary shadow-md" 
+          : "bg-slate-50 dark:bg-slate-800/50 text-sus-muted border-transparent hover:bg-slate-100 dark:hover:bg-slate-800"
+      }`}
+    >
+      {icon}
+      <span className="text-sm">{label}</span>
+    </button>
   );
 }
 

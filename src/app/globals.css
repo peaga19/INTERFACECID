@@ -5,10 +5,12 @@
   --color-sus-primary-hover: #004494;
   --color-sus-secondary: #059669; /* Verde Saúde / Emerald 600 */
   --color-sus-accent: #3b82f6;
-  --color-sus-background: #f8fafc; /* Slate 50 */
-  --color-sus-surface: #ffffff;
-  --color-sus-foreground: #0f172a; /* Slate 900 */
-  --color-sus-muted: #64748b; /* Slate 500 */
+  
+  /* Variáveis Dinâmicas */
+  --color-sus-background: var(--background);
+  --color-sus-surface: var(--surface);
+  --color-sus-foreground: var(--foreground);
+  --color-sus-muted: var(--muted);
   
   --font-sans: var(--font-inter), sans-serif;
   
@@ -18,29 +20,28 @@
 
 @layer base {
   :root {
-    --background: var(--color-sus-background);
-    --foreground: var(--color-sus-foreground);
-    --surface: var(--color-sus-surface);
+    --background: #f8fafc; /* Slate 50 */
+    --foreground: #0f172a; /* Slate 900 */
+    --surface: #ffffff;
+    --muted: #64748b; /* Slate 500 */
   }
 
   .dark {
-    --background: #0f172a;
-    --foreground: #f8fafc;
-    --surface: #1e293b;
+    --background: #0f172a; /* Slate 900 */
+    --foreground: #f8fafc; /* Slate 50 */
+    --surface: #1e293b; /* Slate 800 */
+    --muted: #94a3b8; /* Slate 400 */
   }
 
   .contrast-more {
     --background: #000000;
     --foreground: #ffff00;
     --surface: #111111;
+    --muted: #cccccc;
     --color-sus-primary: #ffff00;
     --color-sus-primary-hover: #ffffff;
     --color-sus-secondary: #00ff00;
     --color-sus-accent: #00ffff;
-    --color-sus-background: #000000;
-    --color-sus-surface: #111111;
-    --color-sus-foreground: #ffff00;
-    --color-sus-muted: #cccccc;
   }
 
   .contrast-more * {

@@ -17,6 +17,23 @@ export function Navigation() {
 
   return (
     <>
+      {/* Mobile Top Header (Visible only on mobile) */}
+      <header className="sm:hidden fixed top-0 left-0 right-0 h-16 bg-sus-surface border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 z-40">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-sus-primary rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-sm">
+            SUS
+          </div>
+          <h2 className="text-lg font-bold text-sus-foreground tracking-tight">Meu SUS Digital</h2>
+        </div>
+        <Link
+          href="/login"
+          className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-colors"
+          aria-label="Sair"
+        >
+          <LogOut className="w-6 h-6" />
+        </Link>
+      </header>
+
       {/* Mobile Bottom Navigation (Visible on small screens) */}
       <nav className="sm:hidden fixed bottom-0 w-full bg-sus-surface border-t border-slate-200 dark:border-slate-800 pb-safe z-40">
         <div className="flex justify-around items-center h-16">
